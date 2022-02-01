@@ -21,4 +21,14 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="startbootstrap-clean-blog-gh-pages\css\" />
+    <Folder Include="startbootstrap-clean-blog-gh-pages\js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\styles.css" />
+    <None Include="wwwroot\js\scripts.js" />
+  </ItemGroup>
+
 </Project>
