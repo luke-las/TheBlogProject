@@ -14,6 +14,7 @@ namespace TheBlogProject.Services
             _context = context;
         }
 
+
         public string UrlFriendly(string title)
         {
             if (title == null) return "";
