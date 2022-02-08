@@ -59,6 +59,7 @@ namespace TheBlogProject.Services
                 UserName = "luke_lasorsa@outlook.com",
                 FirstName = "Luke",
                 LastName = "Lasorsa",
+                DisplayName = "Luke Lasorsa",
                 EmailConfirmed = true
             };
             //create mod user
@@ -69,6 +70,7 @@ namespace TheBlogProject.Services
                 UserName = "chloenhull@gmail.com",
                 FirstName = "Chloe",
                 LastName = "Hull",
+                DisplayName = "Chloe Hull",
                 EmailConfirmed = true
             };
 
