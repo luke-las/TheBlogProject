@@ -35,24 +35,31 @@ namespace TheBlogProject.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Posts/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> BlogPostIndex(int? id)
         {
-            if (id == null)
+            if (id is null)
             {
                 return NotFound();
             }
-
+            var posts = await _context.Posts.Where(p => p.BlogId == id).ToListAsync();
+            return View("Index", posts);
+        }
+        // GET: Posts/Details/5
+           public async Task<IActionResult> Details(string slug)
+        {
+            if (string.IsNullOrEmpty(slug))
+            {
+                return NotFound();
+            }
             var post = await _context.Posts
                 .Include(p => p.Blog)
                 .Include(p => p.BlogUser)
                 .Include(p => p.Tags)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Slug == slug);
             if (post == null)
             {
                 return NotFound();
             }
-
             return View(post);
         }
 
