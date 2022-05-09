@@ -20,13 +20,15 @@ namespace TheBlogProject.Controllers
         private readonly ISlugService _slugService;
         private readonly IImageService _imageService;
         private readonly UserManager<BlogUser> _userManager;
+        private readonly BlogSearchService _blogSearchService;
 
-        public PostsController(ApplicationDbContext context, ISlugService slugService, IImageService imageService, UserManager<BlogUser> userManager)
+        public PostsController(ApplicationDbContext context, ISlugService slugService, IImageService imageService, UserManager<BlogUser> userManager, BlogSearchService blogSearchService)
         {
             _context = context;
             _slugService = slugService;
             _imageService = imageService;
             _userManager = userManager;
+            _blogSearchService = blogSearchService;
         }
 
         public async Task<IActionResult> SearchIndex(string? searchTerm, int? page)
@@ -34,24 +36,7 @@ namespace TheBlogProject.Controllers
             ViewData["SearchTerm"] = searchTerm;
             var pageNumber = page ?? 1;
             var pageSize = 5;
-            var posts = _context.Posts
-                .Where(p => p.ReadyStatus == Enums.ReadyStatus.ProductionReady)
-                .AsQueryable();
-            if (searchTerm is not null)
-            {
-                searchTerm = searchTerm.ToLower();
-                posts = posts.Where(
-                    p => p.Title.ToLower().Contains(searchTerm) ||
-                    p.Abstract.ToLower().Contains(searchTerm) ||
-                    p.Content.ToLower().Contains(searchTerm) ||
-                    p.Comments.Any(c => c.Body.ToLower().Contains(searchTerm) ||
-                                    c.ModeratedBody.ToLower().Contains(searchTerm) ||
-                                    c.BlogUser.FirstName.ToLower().Contains(searchTerm) ||
-                                    c.BlogUser.LastName.ToLower().Contains(searchTerm) ||
-                                    c.BlogUser.Email.ToLower().Contains(searchTerm)));
-            }
-
-            posts = posts.OrderByDescending(p => p.Created);
+            var posts = _blogSearchService.Search(searchTerm);
             return View(await posts.ToPagedListAsync(pageNumber, pageSize));
         }
 
@@ -61,7 +46,6 @@ namespace TheBlogProject.Controllers
             var applicationDbContext = _context.Posts.Include(p => p.Blog).Include(p => p.BlogUser);
             return View(await applicationDbContext.ToListAsync());
         }
-
         public async Task<IActionResult> BlogPostIndex(int? id, int? page)
         {
             if (id is null)
@@ -78,7 +62,8 @@ namespace TheBlogProject.Controllers
             return View(posts);
         }
         // GET: Posts/Details/5
-           public async Task<IActionResult> Details(string slug)
+
+        public async Task<IActionResult> Details(string slug)
         {
             if (string.IsNullOrEmpty(slug))
             {
@@ -88,6 +73,9 @@ namespace TheBlogProject.Controllers
                 .Include(p => p.Blog)
                 .Include(p => p.BlogUser)
                 .Include(p => p.Tags)
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.BlogUser)
+
                 .FirstOrDefaultAsync(m => m.Slug == slug);
             if (post == null)
             {

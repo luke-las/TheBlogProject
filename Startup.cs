@@ -44,6 +44,7 @@ namespace TheBlogProject
             services.AddControllersWithViews();
 
             services.AddScoped<DataService>();
+            services.AddScoped<BlogSearchService>();
 
             //register a preconfigured instance of the mail settings class
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
