@@ -37,16 +37,6 @@ namespace TheBlogProject.Controllers
                 .ToPagedListAsync(pageNumber, pageSize);
 
             return View(await blogs);
-        //public async Task<IActionResult> Index()
-        //{
-        //    var blogs = await _context.Blogs
-        //        .Include(b=>b.BlogUser)
-        //        .ToListAsync();
-        //    return View(blogs);
-        //}
-        public IActionResult Index()
-        {
-            return Index();
         }
         public IActionResult About()
         {

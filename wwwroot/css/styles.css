@@ -605,7 +605,6 @@ progress {
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
-  border: 1px solid #dee2e6;
   max-width: 100%;
   height: auto;
 }
@@ -2973,8 +2972,8 @@ textarea.form-control-lg {
           user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: 1rem 1.75rem;
-  font-size: 0.875rem;
+  padding: 1rem 1rem;
+  font-size: 1rem;
   border-radius: 5px;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

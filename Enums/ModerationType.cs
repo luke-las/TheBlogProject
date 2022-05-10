@@ -8,16 +8,17 @@ namespace TheBlogProject.Enums
 {
     public enum ModerationType
     {
+        [Description("Moderation Type Placeholder.")]
+        Null,
         [Description("Relating to politics.")]
         Politics,
-
-        [Description("Offensive language")]
+        [Description("Offensive language.")]
         Offensive,
-        [Description("Illegal activities")]
+        [Description("Illegal activities.")]
         Illicit,
-        [Description("Displaying personal information")]
+        [Description("Displaying personal information.")]
         PersonalInformation,
-        [Description("Hatred")]
+        [Description("Hatred.")]
         Hatred
     }
 }

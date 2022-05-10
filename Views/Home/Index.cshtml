@@ -1,13 +1,9 @@
 ﻿@using TheBlogProject.Models
-<<<<<<< Updated upstream
 @using X.PagedList
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
 
 @model IPagedList<Blog>
-=======
-@model IEnumerable<Blog>
->>>>>>> Stashed changes
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -16,10 +12,6 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
             @foreach (var blog in Model)
             {
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
                 <div class="post-preview">
                     <a asp-controller="posts" asp-action="blogpostindex" asp-route-id="@blog.Id">
                         <h2 class="post-title">@blog.Name</h2>
@@ -28,27 +20,15 @@
                     <p class="post-meta">
                         authored by
                         <a href="#!">@blog.BlogUser.FullName</a>
-<<<<<<< Updated upstream
                         on @blog.Created.ToString("MMM dd, yyyy")
                     </p>
                 </div>
                 <hr />
             }
-=======
-                        on @blog.Created.ToString("mmm dd, yyyy")
-                    </p>
-                </div>
-            <hr />
-            }
- pager
-<div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">older posts →</a></div>
->>>>>>> Stashed changes
-        </div>
-    </div>
-</div>
+
 
 <div class="row">
-    <div class="col h3">
+    <div class="col h4">
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
     </div>

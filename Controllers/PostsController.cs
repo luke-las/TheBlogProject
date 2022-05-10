@@ -31,7 +31,7 @@ namespace TheBlogProject.Controllers
             _blogSearchService = blogSearchService;
         }
 
-        public async Task<IActionResult> SearchIndex(string? searchTerm, int? page)
+        public async Task<IActionResult> SearchIndex(string searchTerm, int? page)
         {
             ViewData["SearchTerm"] = searchTerm;
             var pageNumber = page ?? 1;
@@ -81,6 +81,9 @@ namespace TheBlogProject.Controllers
             {
                 return NotFound();
             }
+            ViewData["HeaderImage"] = _imageService.DecodeImage(post.ImageData, post.ContentType);
+            ViewData["MainText"] = post.Title;
+            ViewData["SubText"] = post.Abstract;
             return View(post);
         }
 
@@ -147,7 +150,8 @@ namespace TheBlogProject.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("blogpostindex/"+post.BlogId.ToString());
+
             }
 
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Description", post.BlogId);

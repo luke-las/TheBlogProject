@@ -61,9 +61,12 @@ namespace TheBlogProject.Controllers
             {
                 comment.BlogUserId = _userManager.GetUserId(User);
                 comment.Created = DateTime.Now;
+                var post = await _context.Posts.FindAsync(comment.PostId);
+                comment.Post = post;
+                comment.BlogUser= await _context.Users.FindAsync(comment.BlogUserId);
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Posts", new { slug = post.Slug }, "commentSection");
             }
 
             return View(comment);
@@ -85,7 +88,8 @@ namespace TheBlogProject.Controllers
             ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", comment.BlogUserId);
             ViewData["ModeratorId"] = new SelectList(_context.Users, "Id", "Id", comment.ModeratorId);
             ViewData["PostId"] = new SelectList(_context.Posts, "Id", "Abstract", comment.PostId);
-            return View(comment);
+            return RedirectToAction("Details", "Posts", new { slug = comment.Post.Slug }, "commentSection");
+
         }
 
 

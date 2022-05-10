@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>@ViewData["Title"] - The Blog Project</title>
+    <title>A Blog Project</title>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -39,13 +39,13 @@
         </div>
     </nav>
     <!-- Page Header-->
-    <header class="masthead" style="background-image: url('/img/home-bg.jpg')">
+    <header class="masthead" style="background-image: url(@ViewData["HeaderImage"])">
         <div class="container position-relative px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
-                        <h1>Blog Model</h1>
-                        <span class="subheading">A template for future blogs and web applications.</span>
+                        <h1>@ViewData["MainText"]</h1>
+                        <span class="subheading">@ViewData["SubText"]</span>
                         <form asp-action="SearchIndex" asp-controller="Posts">
                             <div class="input-group mt-5">
                                 <input type="text" name="SearchTerm" class="form-control" placeholder="Search Term">

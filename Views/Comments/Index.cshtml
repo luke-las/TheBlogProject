@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<TheBlogProject.Models.Comment>
 
+
 @{
     ViewData["Title"] = "Index";
 }
-
+@if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))
+{
 <h1>Index</h1>
 
 <p>
@@ -46,44 +48,46 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Body)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Moderated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Deleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModeratedBody)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModerationType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Post.Abstract)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BlogUser.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Moderator.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Updated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Moderated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModeratedBody)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModerationType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Post.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlogUser.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Moderator)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+}
