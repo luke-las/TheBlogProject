@@ -22,7 +22,6 @@ namespace TheBlogProject
             var dataService = host.Services.CreateScope().ServiceProvider.GetRequiredService<DataService>();
 
             await dataService.ManageDataAsync();
-
             host.Run();
         }
 
