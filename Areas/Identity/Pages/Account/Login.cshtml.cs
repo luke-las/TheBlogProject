@@ -61,6 +61,9 @@ namespace TheBlogProject.Areas.Identity.Pages.Account
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
+            ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
 
             returnUrl ??= Url.Content("~/");
 

@@ -27,6 +27,7 @@ namespace TheBlogProject.Controllers
             _context = context;
         }
 
+
         public async Task<IActionResult> Index(int? page)
         {
             var pageNumber = page ?? 1;
@@ -35,16 +36,24 @@ namespace TheBlogProject.Controllers
                 .Include(b=>b.BlogUser)
                 .OrderByDescending(b => b.Created)
                 .ToPagedListAsync(pageNumber, pageSize);
-
+            ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
             return View(await blogs);
         }
         public IActionResult About()
         {
+            ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
             return View();
         }
 
         public IActionResult Contact()
         {
+            ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
             return View();
         }
         [HttpPost]
