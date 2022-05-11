@@ -189,7 +189,7 @@ namespace TheBlogProject.Controllers
             ViewData["HeaderImage"] = "/img/home-bg.jpg";
             ViewData["MainText"] = "The Blog Demo";
             ViewData["SubText"] = "This is a template for future web applications.";
-            return View(post);
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Posts/Edit/5
