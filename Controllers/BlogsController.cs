@@ -57,6 +57,9 @@ namespace TheBlogProject.Controllers
         [Authorize(Roles ="Administrator")]
         public IActionResult Create()
         {
+            ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
             return View();
         }
 
@@ -80,6 +83,9 @@ namespace TheBlogProject.Controllers
 
                 return RedirectToAction("Index", "");
             }
+                        ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
             ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", blog.BlogUserId);
             return View(blog);
         }

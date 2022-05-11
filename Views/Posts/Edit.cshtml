@@ -63,7 +63,7 @@
 
                 <div class="form-group">
                     <label asp-for="Image" class="control-label"></label>
-                    <input name="NewImage" file="file" class="form-control" />
+                    <input asp-for="Image" type="file" class="form-control" />
                     <span asp-validation-for="Image" class="text-danger"></span>
                 </div>
 

@@ -37,6 +37,9 @@ namespace TheBlogProject.Controllers
             var pageNumber = page ?? 1;
             var pageSize = 5;
             var posts = _blogSearchService.Search(searchTerm);
+            ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
             return View(await posts.ToPagedListAsync(pageNumber, pageSize));
         }
 
@@ -44,6 +47,9 @@ namespace TheBlogProject.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Posts.Include(p => p.Blog).Include(p => p.BlogUser);
+            ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
             return View(await applicationDbContext.ToListAsync());
         }
         public async Task<IActionResult> BlogPostIndex(int? id, int? page)
@@ -59,6 +65,9 @@ namespace TheBlogProject.Controllers
                 .Where(p => p.BlogId == id && p.ReadyStatus == Enums.ReadyStatus.ProductionReady)
                 .OrderByDescending(p => p.Created)
                 .ToPagedListAsync(pageNumber, pageSize);
+            ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
             return View(posts);
         }
         // GET: Posts/Details/5
@@ -92,6 +101,9 @@ namespace TheBlogProject.Controllers
         {
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Name");
             ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
             return View();
         }
 
@@ -150,7 +162,7 @@ namespace TheBlogProject.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("blogpostindex/"+post.BlogId.ToString());
+                return RedirectToAction("Index", "Home");
 
             }
 
@@ -174,6 +186,9 @@ namespace TheBlogProject.Controllers
             }
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Name", post.BlogId);
             ViewData["TagValues"] = string.Join(",", post.Tags.Select(t => t.Text));
+            ViewData["HeaderImage"] = "/img/home-bg.jpg";
+            ViewData["MainText"] = "The Blog Demo";
+            ViewData["SubText"] = "This is a template for future web applications.";
             return View(post);
         }
 
